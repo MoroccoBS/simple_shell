@@ -13,7 +13,6 @@ int _execute(char **cmd, char **argv)
             freearry2D(cmd);
             exit(0);
         }
-        //on shell.h => extern char **envir + function 
     }
     else
     {
