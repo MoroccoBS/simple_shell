@@ -11,14 +11,14 @@ char *readline(void)
 	size_t len = 0;
 	ssize_t read;
 
-	if(isatty(STDIN_FILENO))
+	if (isatty(STDIN_FILENO))
 	{
 		write(STDOUT_FILENO, "$ ", 2);
 		// fflush(stdout);
 	}
-	read = getline( &line, &len, stdin );
+	read = getline(&line, &len, stdin);
 
-	if(read == -1)
+	if (read == -1)
 	{
 		free(line);
 		line = NULL;

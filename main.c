@@ -9,22 +9,22 @@
 
 int main(int ac, char **argv)
 {
-
 	char *line;
 	(void) ac;
+	(void) argv;
 
-	while(1)
+	while (1)
 	{
 		line = readline();
 		if (line == NULL)
 		{
-			if(isatty(STDIN_FILENO))
+			if (isatty(STDIN_FILENO))
 			{
 				write(STDOUT_FILENO, "$ ", 2);
 			}
 			return (0);
 		}
-		printf("%s", line);
+		printf("%s, %d\n", line);
 		free(line);
 		// add_history(line);
 	}
