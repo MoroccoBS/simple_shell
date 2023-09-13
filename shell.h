@@ -15,6 +15,8 @@ char *readline(void);
 int _strlen(char *string);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
+char *_strdup(const char *str);
+int _strcmp(char *s1, char *s2);
 
 
 #endif
