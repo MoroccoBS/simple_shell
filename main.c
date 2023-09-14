@@ -32,11 +32,5 @@ int main(int ac, char **argv)
 		{
 			continue;
 		}
-		for (i = 0; tokens[i]; i++)
-		{
-			printf("%s\n", tokens[i]);
-			free(tokens[i]);
-		}
-		free(tokens), tokens = NULL;
 	}
 }
