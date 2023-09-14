@@ -20,8 +20,8 @@ char *readline(void)
 
 	if (read == -1)
 	{
-		free(line);
-		line = NULL;
+		write(STDOUT_FILENO, "\n", 1);
+		free(line), line = NULL;;
 	}
 
 

@@ -10,6 +10,8 @@
 int main(int ac, char **argv)
 {
 	char *line;
+	char **tokens;
+	int i;
 	(void) ac;
 	(void) argv;
 
@@ -24,8 +26,17 @@ int main(int ac, char **argv)
 			}
 			return (0);
 		}
-		printf("%s, %d\n", line);
-		free(line);
-		// add_history(line);
+
+		tokens = tokenize(line);
+		if (!tokens)
+		{
+			continue;
+		}
+		for (i = 0; tokens[i]; i++)
+		{
+			printf("%s\n", tokens[i]);
+			free(tokens[i]);
+		}
+		free(tokens), tokens = NULL;
 	}
 }

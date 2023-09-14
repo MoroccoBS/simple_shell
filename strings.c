@@ -67,7 +67,7 @@ char *_strcpy(char *dest, char *src)
 /**
  * _strdup - Duplicate a string
  * @str: The string to duplicate
- * Returns duplicated string, or NULL
+ * Return: duplicated string, or NULL
  */
 
 char *_strdup(const char *str)
@@ -93,9 +93,9 @@ char *_strdup(const char *str)
 
 /**
  * _strcmp - Compare two strings
- * @s1: The first string to compare.
- * @s2: The second string to compare.
- * Returns: An integer value representing the difference between `s1` and `s2`
+ * @s1: first string
+ * @s2: second string
+ * Return: compared strings
  */
 
 int _strcmp(char *s1, char *s2)

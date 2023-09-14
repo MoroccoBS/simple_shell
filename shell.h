@@ -10,7 +10,9 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
-extern char **envir; 
+extern char **envir;
+
+#define WHITESPACE " \t\n"
 
 char *readline(void);
 int _strlen(char *string);
@@ -21,6 +23,7 @@ int _strcmp(char *s1, char *s2);
 int _execute(char **cmd, char **argv);
 
 void freearray2D(char **arr);
+char **tokenize(char *line);
 
 
 #endif

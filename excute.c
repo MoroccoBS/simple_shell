@@ -1,23 +1,31 @@
 #include "shell.h"
+
+/**
+ * _execute - executes a command
+ * @cmd: command
+ * @argv: arguments
+ * Return: statues
+*/
+
 int _execute(char **cmd, char **argv)
 {
     pid_t children;
-    int statues
+    int statues;
 
     children = fork();
-    if (child == 0)
+    if (children == 0)
     {
         if (execve(cmd[0], cmd, envir) == -1)
         {
-            prerror(argv[0]);
-            freearry2D(cmd);
+            perror(argv[0]);
+            freearray2D(cmd);
             exit(0);
         }
     }
     else
     {
-        waitpid(children, &status, 0);
+        waitpid(children, &statues, 0);
         freearray2D(cmd);
     }
-    return (WEXITSATATUS(status));
+    return (WEXITSTATUS(statues));
 }
