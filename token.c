@@ -1,36 +1,5 @@
 #include "shell.h"
 
-// char **tokenize(char *line)
-// {
-//     char **tokens = NULL;
-//     char *token = strtok((char *)line, WHITESPACE);
-//     int count = 0;
-
-//     while (token != NULL)
-//     {
-//         tokens = realloc(tokens, sizeof(char *) * (count + 2));
-//         if (tokens == NULL)
-//         {
-//             // Memory allocation failed
-//             return NULL;
-//         }
-
-//         tokens[count] = strdup(token);
-//         if (tokens[count] == NULL)
-//         {
-//             // Memory allocation failed
-//             return NULL;
-//         }
-
-//         count++;
-//         token = strtok(NULL, WHITESPACE);
-//     }
-
-//     tokens[count] = NULL; // Set the last element to NULL
-
-//     return tokens;
-// }
-
 /**
  * tokenize - splits a string into words
  * @line str: the input string
@@ -49,9 +18,9 @@ char **tokenize(char *line)
 	};
 	temp = _strdup(line);
 	token = strtok(temp, " \t\n");
-	if (!token)
+	if (token == NULL)
 	{
-        free(token), token = NULL;
+		free(line), line = NULL;
 		free(temp), temp = NULL;
 		return (NULL);
 	}
@@ -71,11 +40,11 @@ char **tokenize(char *line)
 	token = strtok(line, " \t\n");
 	while (token)
 	{
-		tokens[j] = token;
+		tokens[j] = _strdup(token);
 		token = strtok(NULL, " \t\n");
 		j++;
 	}
-	// free(line), line = NULL;
+	free(line), line = NULL;
 	tokens[j] = NULL;
 	return (tokens);
 }

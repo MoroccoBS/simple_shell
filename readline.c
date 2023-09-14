@@ -3,7 +3,7 @@
 /**
  * readline - reads a line of text from STDIN
  * Return: string
-*/
+ */
 
 char *readline(void)
 {
@@ -14,16 +14,13 @@ char *readline(void)
 	if (isatty(STDIN_FILENO))
 	{
 		write(STDOUT_FILENO, "$ ", 2);
-		// fflush(stdout);
 	}
 	read = getline(&line, &len, stdin);
 
 	if (read == -1)
 	{
-		write(STDOUT_FILENO, "\n", 1);
-		free(line), line = NULL;;
+		free(line), line = NULL;
 	}
-
 
 	return (line);
 }

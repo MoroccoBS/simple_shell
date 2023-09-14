@@ -4,16 +4,15 @@
  * main - the shell
  * @argv: arguments
  * @ac: arguments
+ * @enviornment: environment
  * Return: 0
-*/
+ */
 
-int main(int ac, char **argv)
+int main(int ac, char **argv, char **enviornment)
 {
-	char *line;
-	char **tokens;
-	int i;
-	(void) ac;
-	(void) argv;
+	char *line, **tokens;
+	int status = 0;
+	(void)ac;
 
 	while (1)
 	{
@@ -24,7 +23,7 @@ int main(int ac, char **argv)
 			{
 				write(STDOUT_FILENO, "$ ", 2);
 			}
-			return (0);
+			return (status);
 		}
 
 		tokens = tokenize(line);
@@ -32,5 +31,7 @@ int main(int ac, char **argv)
 		{
 			continue;
 		}
+
+		status = _execute(tokens, argv, enviornment);
 	}
 }
