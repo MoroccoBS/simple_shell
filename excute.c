@@ -6,7 +6,7 @@
  * @enviornment: environment
  * Return: status
  */
-int _execute(char **cmd, char **argv, char **enviornment)
+int _execute(char **cmd, char **argv, char **enviornment, int indexnum)
 {
 	char *fullcmd;
 	pid_t childProcess;
@@ -15,7 +15,7 @@ int _execute(char **cmd, char **argv, char **enviornment)
 	fullcmd = handlepath(cmd[0]);
 	if (!fullcmd)
 	{
-		error();
+		error(argv[0], cmd[0], indexnum);
 		freeArray(cmd);
 		return (127);
 	}
