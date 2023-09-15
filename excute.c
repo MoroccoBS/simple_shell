@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * _execute - executes a command
  * @cmd: command
@@ -7,20 +6,26 @@
  * @enviornment: environment
  * Return: status
  */
-
 int _execute(char **cmd, char **argv, char **enviornment)
 {
+	char *fullcmd;
 	pid_t childProcess;
 	int status;
 
+	fullcmd = handlepath(cmd[0]);
+	if (!fullcmd)
+	{
+		error();
+		freeArray(cmd);
+		return (127);
+	}
 	childProcess = fork();
 	if (childProcess == 0)
 	{
-		if (execve(cmd[0], cmd, enviornment) == -1)
+		if (execve(fullcmd, cmd, enviornment) == -1)
 		{
-			perror(argv[0]);
+			free (fullcmd), fullcmd = NULL;
 			freeArray(cmd);
-			exit(0);
 		}
 	}
 	else
@@ -29,7 +34,7 @@ int _execute(char **cmd, char **argv, char **enviornment)
 		{
 			perror("waitpid");
 			freeArray(cmd);
-			exit(1);
+			free (fullcmd), fullcmd = NULL;
 		}
 		freeArray(cmd);
 	}
