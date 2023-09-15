@@ -21,6 +21,7 @@ char *_strcpy(char *dest, char *src);
 char *_strdup(const char *str);
 int _strcmp(char *s1, char *s2);
 int _execute(char **cmd, char **argv, char **enviornment);
+char *_getenvironement(char *variable)
 
 void freeArray(char **arr);
 char **tokenize(char *line);
