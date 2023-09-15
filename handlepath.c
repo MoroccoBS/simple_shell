@@ -1,40 +1,50 @@
 #include "shell.h"
-char *_handlepath(char *cmd)
-{
-    char *pathenv, *fullcmd, *directory;
-    struct stat ad;
-    for (i = 0; cmd[i], i++)
-    {
-        if (cmd[i] == "/")
-        {
-            if (stat(cmd, &ad) == 0)
-                return (_strdup(cmd));
 
-            return (NULL);   
-        }
-    }
-    pathenv = _getenvironement("PATH");
-    if (!pathenv)
-        return (NULL);
-    
-     directory = strtok(pathenv, ":")
-    while (directory)
-    {
-        fullcmd = malloc(_strlen(directory) + _strlen(cmd) + 2)
-        if (fullcmd)
-        {
-            _strcpy(fullcmd, directory)
-            _strcat(fullcmd, "./")
-            _strcat(fullcmd, cmd)
-            if (stat(fullcmd, &ad) == 0)
-            {
-                free (pathenv);
-                return (fullcmd);
-            }
-            free (fullcmd), fullcmd = NULL;
-            directory = strtok(NULL, ":")
-        }
-    }
-    free (pathenv);
-    return (NULL);
+/**
+ * _handlePath - handles the path
+ * @cmd: command
+ * @environment: environment
+ * Return: path
+ */
+char *_handlePath(char *cmd, char **environment)
+{
+	char *pathEnv, *fullCmd, *directory;
+	struct stat state;
+	int i;
+
+	for (i = 0; cmd[i]; i++)
+	{
+		if (cmd[i] == '/')
+		{
+			if (stat(cmd, &state) == 0)
+				return (_strdup(cmd));
+
+			return (NULL);
+		}
+	}
+
+	pathEnv = _getEnvironment("PATH", environment);
+	if (!pathEnv)
+		return (NULL);
+
+	directory = strtok(pathEnv, ":");
+	while (directory)
+	{
+		fullCmd = malloc(_strlen(directory) + _strlen(cmd) + 2);
+		if (fullCmd)
+		{
+			_strcpy(fullCmd, directory);
+			_strcat(fullCmd, "./");
+			_strcat(fullCmd, cmd);
+			if (stat(fullCmd, &state) == 0)
+			{
+				free(pathEnv);
+				return (fullCmd);
+			}
+			free(fullCmd), fullCmd = NULL;
+			directory = strtok(NULL, ":");
+		}
+	}
+	free(pathEnv);
+	return (NULL);
 }

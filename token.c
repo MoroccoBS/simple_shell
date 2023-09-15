@@ -17,7 +17,7 @@ char **tokenize(char *line)
 		return (NULL);
 	};
 	temp = _strdup(line);
-	token = strtok(temp, " \t\n");
+	token = strtok(temp, WHITESPACE);
 	if (token == NULL)
 	{
 		free(line), line = NULL;
@@ -27,7 +27,7 @@ char **tokenize(char *line)
 	while (token)
 	{
 		i++;
-		token = strtok(NULL, " \t\n");
+		token = strtok(NULL, WHITESPACE);
 	}
 	free(temp), temp = NULL;
 
@@ -37,11 +37,11 @@ char **tokenize(char *line)
 		free(line), line = NULL;
 		return (NULL);
 	}
-	token = strtok(line, " \t\n");
+	token = strtok(line, WHITESPACE);
 	while (token)
 	{
 		tokens[j] = _strdup(token);
-		token = strtok(NULL, " \t\n");
+		token = strtok(NULL, WHITESPACE);
 		j++;
 	}
 	free(line), line = NULL;

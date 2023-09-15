@@ -3,28 +3,29 @@
  * _execute - executes a command
  * @cmd: command
  * @argv: arguments
- * @enviornment: environment
+ * @environment: environment
+ * @indexNum: index
  * Return: status
  */
-int _execute(char **cmd, char **argv, char **enviornment, int indexnum)
+int _execute(char **cmd, char **argv, char **environment, int indexNum)
 {
-	char *fullcmd;
+	char *fullCmd;
 	pid_t childProcess;
 	int status;
 
-	fullcmd = handlepath(cmd[0]);
-	if (!fullcmd)
+	fullCmd = _handlePath(cmd[0], environment);
+	if (!fullCmd)
 	{
-		error(argv[0], cmd[0], indexnum);
+		printError(argv[0], cmd[0], indexNum);
 		freeArray(cmd);
 		return (127);
 	}
 	childProcess = fork();
 	if (childProcess == 0)
 	{
-		if (execve(fullcmd, cmd, enviornment) == -1)
+		if (execve(fullCmd, cmd, environment) == -1)
 		{
-			free (fullcmd), fullcmd = NULL;
+			free(fullCmd), fullCmd = NULL;
 			freeArray(cmd);
 		}
 	}
@@ -34,7 +35,7 @@ int _execute(char **cmd, char **argv, char **enviornment, int indexnum)
 		{
 			perror("waitpid");
 			freeArray(cmd);
-			free (fullcmd), fullcmd = NULL;
+			free(fullCmd), fullCmd = NULL;
 		}
 		freeArray(cmd);
 	}
