@@ -20,7 +20,7 @@ char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
 char *_strdup(const char *str);
 int _strcmp(char *s1, char *s2);
-int _execute(char **cmd, char **argv, char **enviornment);
+int _execute(char **cmd, char **argv, char **enviornment, int indexnum);
 char *_getenvironement(char *variable);
 char *_handlepath(char *cmd);
 void error(char *name, char *cmd, int indexnum);
