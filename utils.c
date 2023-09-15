@@ -54,7 +54,7 @@ char *_inttoascii()
 
     return (strdup(buffer));
 }
-void revrsestr(char *str, int len)
+void reversestr(char *str, int len)
 {
     char tmp;
     int start = 0;
