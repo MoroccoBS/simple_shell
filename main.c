@@ -8,10 +8,10 @@
  * Return: 0
  */
 
-int main(int ac, char **argv, char **enviornment)
+int main(int ac, char **argv, char **environement)
 {
 	char *line, **tokens;
-	int status = 0;
+	int status = 0, indexnum = 0;
 	(void)ac;
 
 	while (1)
@@ -25,6 +25,7 @@ int main(int ac, char **argv, char **enviornment)
 			}
 			return (status);
 		}
+		indexnum++;
 
 		tokens = tokenize(line);
 		if (!tokens)
@@ -32,6 +33,6 @@ int main(int ac, char **argv, char **enviornment)
 			continue;
 		}
 
-		status = _execute(tokens, argv, enviornment);
+		status = _execute(tokens, argv, environement, indexnum);
 	}
 }
