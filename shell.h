@@ -25,7 +25,8 @@ char *_getenvironement(char *variable);
 char *_handlepath(char *cmd);
 void error(char *name, char *cmd, int indexnum);
 
-char *_inttoascii()
+char *_inttoascii();
+void reversestr(char *str, int len);
 
 void freeArray(char **arr);
 char **tokenize(char *line);
