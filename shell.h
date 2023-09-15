@@ -23,6 +23,7 @@ int _strcmp(char *s1, char *s2);
 int _execute(char **cmd, char **argv, char **enviornment);
 char *_getenvironement(char *variable);
 char *_handlepath(char *cmd);
+void error(char *name, char *cmd, int indexnum);
 
 void freeArray(char **arr);
 char **tokenize(char *line);
