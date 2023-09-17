@@ -6,6 +6,7 @@
  * @environment: environment
  * Return: path
  */
+
 char *_handlePath(char *cmd, char **environment)
 {
 	char *pathEnv, *pathEnvCopy, *fullCmd, *directory;
@@ -39,13 +40,14 @@ char *_handlePath(char *cmd, char **environment)
 			if (stat(fullCmd, &state) == 0)
 			{
 				free(pathEnvCopy);
+				free(pathEnv);
 				return (fullCmd);
 			}
-			free(fullCmd), fullCmd = NULL;
+			free(fullCmd);
 		}
 		directory = strtok(NULL, ":");
 	}
-	free(pathEnvCopy), pathEnvCopy = NULL;
-	free(pathEnv), pathEnv = NULL;
+	free(pathEnvCopy);
+	free(pathEnv);
 	return (NULL);
 }
