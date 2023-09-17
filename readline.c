@@ -15,7 +15,7 @@ char *readline(void)
 	{
 		write(STDOUT_FILENO, "$ ", 2);
 	}
-	read = getline(&line, &len, stdin);
+	read = myGetline(&line, &len, stdin);
 
 	if (read == -1)
 	{

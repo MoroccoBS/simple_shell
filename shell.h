@@ -56,4 +56,10 @@ void freeArray(char **arr);
 // Function to tokenize a string into an array of strings
 char **tokenize(char *line);
 
+// Function to split a string into tokens
+char *myStrtok(char *str, const char *delim);
+
+// Function to read a line of input from the user
+ssize_t myGetline(char **linePtr, size_t *n, FILE *stream);
+
 #endif

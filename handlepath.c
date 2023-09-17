@@ -28,7 +28,7 @@ char *_handlePath(char *cmd, char **environment)
 		return (NULL);
 
 	pathEnvCopy = _strdup(pathEnv);
-	directory = strtok(pathEnvCopy, ":");
+	directory = myStrtok(pathEnvCopy, ":");
 	while (directory)
 	{
 		fullCmd = malloc(_strlen(directory) + _strlen(cmd) + 2);
@@ -45,7 +45,7 @@ char *_handlePath(char *cmd, char **environment)
 			}
 			free(fullCmd);
 		}
-		directory = strtok(NULL, ":");
+		directory = myStrtok(NULL, ":");
 	}
 	free(pathEnvCopy);
 	free(pathEnv);

@@ -15,10 +15,10 @@ char *_getEnvironment(char *variable, char **environment)
 	for (i = 0; environment[i]; i++)
 	{
 		tmp = _strdup(environment[i]);
-		key = strtok(tmp, "=");
+		key = myStrtok(tmp, "=");
 		if (_strcmp(key, variable) == 0)
 		{
-			value = strtok(NULL, "\n");
+			value = myStrtok(NULL, "\n");
 			env = _strdup(value);
 			free(tmp), tmp = NULL;
 			return (env);
