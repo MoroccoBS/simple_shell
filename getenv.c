@@ -9,7 +9,7 @@
 
 char *_getEnvironment(char *variable, char **environment)
 {
-	char *tmp, *key, *value;
+	char *tmp, *key, *value, *env;
 	int i;
 
 	for (i = 0; environment[i]; i++)
@@ -19,8 +19,9 @@ char *_getEnvironment(char *variable, char **environment)
 		if (_strcmp(key, variable) == 0)
 		{
 			value = strtok(NULL, "\n");
-			free(tmp);
-			return (value);
+			env = _strdup(value);
+			free(tmp), tmp = NULL;
+			return (env);
 		}
 		free(tmp), tmp = NULL;
 	}

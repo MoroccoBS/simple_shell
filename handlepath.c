@@ -8,7 +8,7 @@
  */
 char *_handlePath(char *cmd, char **environment)
 {
-	char *pathEnv, *fullCmd, *directory;
+	char *pathEnv, *pathEnvCopy, *fullCmd, *directory;
 	struct stat state;
 	int i;
 
@@ -18,7 +18,6 @@ char *_handlePath(char *cmd, char **environment)
 		{
 			if (stat(cmd, &state) == 0)
 				return (_strdup(cmd));
-
 			return (NULL);
 		}
 	}
@@ -27,24 +26,26 @@ char *_handlePath(char *cmd, char **environment)
 	if (!pathEnv)
 		return (NULL);
 
-	directory = strtok(pathEnv, ":");
+	pathEnvCopy = _strdup(pathEnv);
+	directory = strtok(pathEnvCopy, ":");
 	while (directory)
 	{
 		fullCmd = malloc(_strlen(directory) + _strlen(cmd) + 2);
 		if (fullCmd)
 		{
 			_strcpy(fullCmd, directory);
-			_strcat(fullCmd, "./");
+			_strcat(fullCmd, "/");
 			_strcat(fullCmd, cmd);
 			if (stat(fullCmd, &state) == 0)
 			{
-				free(pathEnv);
+				free(pathEnvCopy);
 				return (fullCmd);
 			}
 			free(fullCmd), fullCmd = NULL;
-			directory = strtok(NULL, ":");
 		}
+		directory = strtok(NULL, ":");
 	}
-	free(pathEnv);
+	free(pathEnvCopy), pathEnvCopy = NULL;
+	free(pathEnv), pathEnv = NULL;
 	return (NULL);
 }

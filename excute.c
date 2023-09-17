@@ -25,18 +25,19 @@ int _execute(char **cmd, char **argv, char **environment, int indexNum)
 	{
 		if (execve(fullCmd, cmd, environment) == -1)
 		{
-			free(fullCmd), fullCmd = NULL;
-			freeArray(cmd);
+			perror("execve");
 		}
+		free(fullCmd), fullCmd = NULL;
+		freeArray(cmd);
+		exit(EXIT_FAILURE); // Add this line to terminate the child process
 	}
 	else
 	{
 		if (waitpid(childProcess, &status, 0) == -1)
 		{
 			perror("waitpid");
-			freeArray(cmd);
-			free(fullCmd), fullCmd = NULL;
 		}
+		free(fullCmd), fullCmd = NULL;
 		freeArray(cmd);
 	}
 	return (WEXITSTATUS(status));
