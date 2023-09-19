@@ -103,15 +103,16 @@ char *_strdup(const char *str)
 
 int _strcmp(char *s1, char *s2)
 {
-	int cmp;
+	int i;
+	int dif = 0;
 
-	cmp = (int)*s1 - (int)*s2;
-	while (*s2)
+	for (i = 0; s1[i] != '\0' && s2[i] != '\0'; i++)
 	{
-		if (*s1 != *s2)
+		if (s1[i] != s2[i])
+		{
+			dif = s1[i] - s2[i];
 			break;
-		s1++;
-		cmp = (int)*s1 - (int)*s2;
+		}
 	}
-	return (cmp);
+	return (dif);
 }

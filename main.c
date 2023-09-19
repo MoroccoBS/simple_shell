@@ -4,14 +4,14 @@
  * main - the shell
  * @argv: arguments
  * @ac: arguments
- * @enviornment: environment
+ * @environment: environment
  * Return: 0
  */
 
-int main(int ac, char **argv, char **environement)
+int main(int ac, char **argv, char **environment)
 {
 	char *line, **tokens;
-	int status = 0, indexnum = 0;
+	int status = 0, indexNum = 0;
 	(void)ac;
 
 	while (1)
@@ -25,7 +25,7 @@ int main(int ac, char **argv, char **environement)
 			}
 			return (status);
 		}
-		indexnum++;
+		indexNum++;
 
 		tokens = tokenize(line);
 		if (!tokens)
@@ -33,6 +33,13 @@ int main(int ac, char **argv, char **environement)
 			continue;
 		}
 
-		status = _execute(tokens, argv, environement, indexnum);
+		if (isBuiltIn(tokens[0]))
+		{
+			handleBuiltIn(tokens, argv, &status, indexNum, environment);
+		}
+		else
+		{
+			status = _execute(tokens, argv, environment, indexNum);
+		}
 	}
 }
