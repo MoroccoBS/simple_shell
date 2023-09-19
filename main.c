@@ -33,6 +33,13 @@ int main(int ac, char **argv, char **environment)
 			continue;
 		}
 
-		status = _execute(tokens, argv, environment, indexNum);
+		if (isBuiltIn(tokens[0]))
+		{
+			handleBuiltIn(tokens, argv, &status, indexNum, environment);
+		}
+		else
+		{
+			status = _execute(tokens, argv, environment, indexNum);
+		}
 	}
 }

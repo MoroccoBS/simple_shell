@@ -12,54 +12,64 @@
 #include <errno.h>
 
 #define WHITESPACE " \t\n"
-/*extern char **environment;*/
+// #define MAX_ALIASES 100
+// #define MAX_ALIAS_LENGTH 50
 
-// Function to read a line of input from the user
-char *readline(void);
+// struct Alias
+// {
+// 	char name[MAX_ALIAS_LENGTH];
+// 	char value[MAX_ALIAS_LENGTH];
+// };
 
-// Function to calculate the length of a string
-int _strlen(char *string);
+// extern struct Alias aliases[MAX_ALIASES];
+// extern int numAliases;
 
-// Function to concatenate two strings
-char *_strcat(char *dest, char *src);
+/* =================== utils =========================*/
+void freeArray(char **arr);									/*Function to free memory allocated for an array of strings */
+void printError(char *name, char *cmd, int indexNum);		/*Function to print an error message */
+void printErrorOfExit(char *name, char *cmd, int indexNum); /*Function to print an error message for exit */
+char *_intToAscii();										/*Function to convert an integer to ASCII string*/
+void reverseStr(char *string, int length);					/*Function to reverse a string*/
+int isPositive(char *str);									/*Function to check if a string is positive*/
+int _atoi(char *str);										/*Function to convert a string to an integer*/
 
-// Function to copy the contents of one string to another
-char *_strcpy(char *dest, char *src);
+/* ================== utils2 ==========================*/
+int isPositive(char *str);								   /*Function to check if a string is positive*/
+int _atoi(char *str);									   /*Function to convert a string to an integer*/
+char *_getEnvironment(char *variable, char **environment); /*Function to get the value of an environment variable*/
+char **tokenize(char *line);							   /*Function to tokenize a string into an array of strings*/
+char *readline(void);									   /*Function to read a line of input from the user*/
 
-// Function to duplicate a string
-char *_strdup(const char *str);
+/* ==================== strings =======================*/
+int _strlen(char *string);			  /*Function to calculate the length of a string*/
+char *_strcat(char *dest, char *src); /*Function to concatenate two strings*/
+char *_strcpy(char *dest, char *src); /*Function to copy the contents of one string to another*/
+char *_strdup(const char *str);		  /*Function to duplicate a string*/
+int _strcmp(char *s1, char *s2);	  /*Function to compare two strings*/
 
-// Function to compare two strings
-int _strcmp(char *s1, char *s2);
+/* ==================== execute ===================*/
+int _execute(char **cmd, char **argv, char **environment, int indexNum); /*Function to execute a command*/
 
-// Function to execute a command
-int _execute(char **cmd, char **argv, char **environment, int indexNum);
+/* ===================== handlers =================*/
+char *_handlePath(char *cmd, char **environment); /*Function to handle the PATH environment variable*/
+void handleExit(char **command, char **argv, int *status, int index);
+void handleBuiltIn(char **command, char **argv, int *status, int index, char **enviornment);
+void handleEnv(char **command, int *status, char **enviornment);
 
-// Function to get the value of an environment variable
-char *_getEnvironment(char *variable, char **environment);
+/* ==================== myStrtok ===================*/
+char *myStrtok(char *str, const char *delim); /*Function to split a string into tokens*/
 
-// Function to handle the PATH environment variable
-char *_handlePath(char *cmd, char **environment);
+/* ==================== myGetline ===================*/
+ssize_t myGetline(char **linePtr, size_t *n, FILE *stream); /*Function to read a line of input from the user*/
 
-// Function to print an error message
-void printError(char *name, char *cmd, int indexNum);
+/* ==================== isBuiltIn =================*/
+int isBuiltIn(char *command);
 
-// Function to convert an integer to ASCII string
-char *_intToAscii();
-
-// Function to reverse a string
-void reverseStr(char *string, int length);
-
-// Function to free memory allocated for an array of strings
-void freeArray(char **arr);
-
-// Function to tokenize a string into an array of strings
-char **tokenize(char *line);
-
-// Function to split a string into tokens
-char *myStrtok(char *str, const char *delim);
-
-// Function to read a line of input from the user
-ssize_t myGetline(char **linePtr, size_t *n, FILE *stream);
+// // Alias functions
+// void printAlias(char *name);
+// void printAliases();
+// char *getAlias(char *name);
+// void defineAlias(char *name, char *value);
+// char *getAliasValue(char *name);
 
 #endif

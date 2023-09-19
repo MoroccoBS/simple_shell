@@ -42,6 +42,26 @@ void printError(char *name, char *cmd, int indexNum)
 
 	free(index);
 }
+/**
+ * printErrorOfExit - returns an error message for exit
+ * @name: name of the command
+ * @cmd: command
+ * @indexNum: index
+ * Return: void
+ */
+void printErrorOfExit(char *name, char *cmd, int indexNum)
+{
+	char *index, errMessage[] = ": exit: Illegal number: ";
+
+	index = _intToAscii(indexNum);
+	write(STDERR_FILENO, name, _strlen(name));
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, index, _strlen(index));
+	write(STDERR_FILENO, errMessage, _strlen(errMessage));
+	write(STDERR_FILENO, cmd, _strlen(cmd));
+	write(STDERR_FILENO, "\n", 1);
+	free(index);
+}
 
 /**
  * _intToAscii - converts an integer to ascii
