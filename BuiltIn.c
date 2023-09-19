@@ -2,7 +2,7 @@
 
 /**
  * isBuiltIn - checks if the command is a built-in
- * @cmd: command
+ * @command: command
  * Return: 0 or 1
  */
 
@@ -32,32 +32,8 @@ void handleBuiltIn(
 	{
 		handleExit(command, argv, status, index);
 	}
-	/*else if (_strcmp(command[0], "cd"))
-	{
-		handleCd();
-	}*/
 	else if (_strcmp(command[0], "env") == 0)
 	{
 		handleEnv(command, status, enviornment);
 	}
 }
-
-/*if (_strcmp(tokens[0], "alias") == 0)
-{
-	if (tokens[1] && tokens[2])
-	{
-		defineAlias(tokens[1], tokens[2]);
-		freeArray(tokens);
-	}
-	else if (tokens[1])
-	{
-		printAlias(tokens[1]);
-		freeArray(tokens);
-	}
-	else
-	{
-		printAliases();
-		freeArray(tokens);
-	}
-	continue;
-}*/

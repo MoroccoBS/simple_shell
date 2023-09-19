@@ -13,11 +13,6 @@ int _execute(char **cmd, char **argv, char **environment, int indexNum)
 	pid_t childProcess;
 	int status;
 
-	/*	char *aliasValue = getAliasValue(cmd[0]);
-	if (aliasValue)
-	{
-		cmd[0] = aliasValue;
-	}*/
 	fullCmd = _handlePath(cmd[0], environment);
 
 	if (!fullCmd)
