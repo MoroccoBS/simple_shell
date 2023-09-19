@@ -2,7 +2,7 @@
 
 /**
  * isBuiltIn - checks if the command is a built-in
- * @cmd: command
+ * @command: command
  * Return: 0 or 1
  */
 
@@ -11,7 +11,7 @@ int isBuiltIn(char *command)
 	int i;
 
 	char *builtIns[] = {
-		"exit", "cd", "env", "setenv", NULL};
+		"exit", "cd", "env", "setenv", "alias", NULL};
 
 	for (i = 0; builtIns[i]; i++)
 	{
@@ -24,6 +24,14 @@ int isBuiltIn(char *command)
 	return (0);
 }
 
+/**
+ * handleBuiltIn - handles built-in commands
+ * @command: command
+ * @argv: arguments
+ * @status: status to exit with
+ * @index: index
+ * @enviornment: enviornment
+ */
 void handleBuiltIn(
 	char **command, char **argv, int *status, int index, char **enviornment)
 {
@@ -39,6 +47,10 @@ void handleBuiltIn(
 	else if (_strcmp(command[0], "env") == 0)
 	{
 		handleEnv(command, status, enviornment);
+	}
+	else if (_strcmp(command[0], "alias") == 0)
+	{
+		handleAlias(command);
 	}
 }
 

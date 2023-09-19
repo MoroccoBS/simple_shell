@@ -37,6 +37,11 @@ int main(int ac, char **argv, char **environment)
 		{
 			handleBuiltIn(tokens, argv, &status, indexNum, environment);
 		}
+		else if (getAliasValue(tokens[0]) != NULL)
+		{
+			tokens = getAliasValue(tokens[0]);
+			status = _execute(tokens, argv, environment, indexNum);
+		}
 		else
 		{
 			status = _execute(tokens, argv, environment, indexNum);

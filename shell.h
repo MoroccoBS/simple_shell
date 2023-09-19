@@ -11,7 +11,7 @@
 #include <fcntl.h>
 #include <errno.h>
 
-#define WHITESPACE " \t\n"
+#define WHITESPACE " \t\n="
 // #define MAX_ALIASES 100
 // #define MAX_ALIAS_LENGTH 50
 
@@ -49,13 +49,15 @@ int _strcmp(char *s1, char *s2);	  /*Function to compare two strings*/
 
 /* ==================== execute ===================*/
 int _execute(char **cmd, char **argv, char **environment, int indexNum); /*Function to execute a command*/
+int _executeAlias(char **cmd, char **argv, char **environment, int indexNum);
 
 /* ===================== handlers =================*/
-char *_handlePath(char *cmd, char **environment); /*Function to handle the PATH environment variable*/
+char *handlePath(char *cmd, char **environment); /*Function to handle the PATH environment variable*/
 void handleExit(char **command, char **argv, int *status, int index);
 void handleBuiltIn(char **command, char **argv, int *status, int index, char **enviornment);
 void handleEnv(char **command, int *status, char **enviornment);
-
+void handleAlias(char **command);
+char **getAliasValue(char *name);
 /* ==================== myStrtok ===================*/
 char *myStrtok(char *str, const char *delim); /*Function to split a string into tokens*/
 

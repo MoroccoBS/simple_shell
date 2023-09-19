@@ -51,13 +51,13 @@ void handleExit(char **command, char **argv, int *status, int index)
 }
 
 /**
- * _handlePath - handles the path
+ * handlePath - handles the path
  * @cmd: command
  * @environment: environment
  * Return: path
  */
 
-char *_handlePath(char *cmd, char **environment)
+char *handlePath(char *cmd, char **environment)
 {
 	char *pathEnv, *pathEnvCopy, *fullCmd, *directory;
 	struct stat state;
@@ -96,4 +96,78 @@ char *_handlePath(char *cmd, char **environment)
 	free(pathEnvCopy);
 	free(pathEnv);
 	return (NULL);
+}
+
+#define MAX_ALIASES 100
+
+typedef struct
+{
+	char name[50];
+	char value[50];
+} Alias;
+
+Alias aliases[MAX_ALIASES];
+int numAliases = 0;
+
+/**
+ * handleAlias - handles alis command
+ * @command: command
+ */
+void handleAlias(char **command)
+{
+	if (!command[1])
+	{
+		for (int i = 0; i < numAliases; i++)
+		{
+			printf("%s='%s'\n", aliases[i].value, aliases[i].name);
+		}
+		freeArray(command);
+	}
+	else if (command[1] && !command[2])
+	{
+		for (int i = 0; i < numAliases; i++)
+		{
+			if (strcmp(aliases[i].name, command[2]) == 0)
+			{
+				printf("%s='%s'\n", aliases[i].name, aliases[i].value);
+				freeArray(command);
+				return;
+			}
+		}
+		freeArray(command);
+	}
+	else if (command[1] && command[2])
+	{
+		for (int i = 0; i < numAliases; i++)
+		{
+			if (strcmp(aliases[i].name, command[2]) == 0)
+			{
+				strcpy(aliases[i].value, command[1]);
+				freeArray(command);
+				return;
+			}
+		}
+
+		if (numAliases < MAX_ALIASES)
+		{
+			strcpy(aliases[numAliases].name, command[2]);
+			strcpy(aliases[numAliases].value, command[1]);
+			numAliases++;
+		}
+		freeArray(command);
+	}
+}
+
+char **getAliasValue(char *name)
+{
+	char **tokens;
+	for (int i = 0; i < numAliases; i++)
+	{
+		if (strcmp(aliases[i].name, name) == 0)
+		{
+			tokens = tokenize(aliases[i].value);
+			return tokens;
+		}
+	}
+	return NULL;
 }
