@@ -12,17 +12,6 @@
 #include <errno.h>
 
 #define WHITESPACE " \t\n"
-// #define MAX_ALIASES 100
-// #define MAX_ALIAS_LENGTH 50
-
-// struct Alias
-// {
-// 	char name[MAX_ALIAS_LENGTH];
-// 	char value[MAX_ALIAS_LENGTH];
-// };
-
-// extern struct Alias aliases[MAX_ALIASES];
-// extern int numAliases;
 
 /* =================== utils =========================*/
 void freeArray(char **arr);									/*Function to free memory allocated for an array of strings */
@@ -64,12 +53,5 @@ ssize_t myGetline(char **linePtr, size_t *n, FILE *stream); /*Function to read a
 
 /* ==================== isBuiltIn =================*/
 int isBuiltIn(char *command);
-
-// // Alias functions
-// void printAlias(char *name);
-// void printAliases();
-// char *getAlias(char *name);
-// void defineAlias(char *name, char *value);
-// char *getAliasValue(char *name);
 
 #endif
